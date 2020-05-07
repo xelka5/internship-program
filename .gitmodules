@@ -1,0 +1,8 @@
+[submodule "internship-program-frontend"]
+	path = internship-program-frontend
+	url = https://github.com/xelka5/internship-program-frontend.git
+	branch = master
+[submodule "internship-program-backend"]
+	path = internship-program-backend
+	url = https://github.com/xelka5/internship-program-backend.git
+	branch = master

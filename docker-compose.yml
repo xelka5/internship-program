@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  internship-program-frontend:
+    build: ./internship-program-frontend
+    ports:
+      - '4300:80'
+  internship-program-backend:
+    build: ./internship-program-backend
+    ports:
+      - '8085:8080'
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'internship-program'
+      MYSQL_USER: '@dm1nUser11'
+      MYSQL_PASSWORD: 'us3rp@ssw0rD12'
+      MYSQL_ROOT_PASSWORD: 's0m3s3cr3t1ntr13'
+    ports:
+      - '3310:3306'
+    volumes:
+      - internship-storage:/var/lib/mysql
+
+volumes:
+  internship-storage:

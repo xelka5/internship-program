@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  internship-program-ui-dev:
+    build: 
+      context: ./internship-program-frontend
+      dockerfile: dockerfile-dev
+    ports:
+      - '4201:80'
+    depends_on:
+      - internship-program-api-dev
+    networks:
+      - internship-program-dev-network
+  internship-program-api-dev:
+    build: 
+      context: ./internship-program-backend
+      dockerfile: dockerfile-dev
+    restart: on-failure
+    ports:
+      - '8081:8080'
+      - '5005:5005'
+    depends_on:
+      - internship-program-db-dev
+    networks:
+      - internship-program-dev-network
+  internship-program-db-dev:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'internship-program'
+      MYSQL_USER: '@dm1nUser11'
+      MYSQL_PASSWORD: 'us3rp@ssw0rD12'
+      MYSQL_ROOT_PASSWORD: 's0m3s3cr3t1ntr13'
+    ports:
+      - '3308:3306'
+    volumes:
+      - internship-storage-dev:/var/lib/mysql
+    networks:
+      - internship-program-dev-network
+
+volumes:
+  internship-storage-dev:
+
+networks:
+  internship-program-dev-network:
+    driver: bridge
